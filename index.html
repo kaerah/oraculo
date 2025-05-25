@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=yes">
+  <title>Hannah Oráculo</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Silkscreen', monospace;
+      background: linear-gradient(160deg, #0f0f23, #1a1a40);
+      color: #fdfdfd;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 28px;
+      color: #ffb6f2;
+      text-shadow: 0 0 6px #f0f;
+    }
+
+    .avatar {
+      margin-top: 10px;
+      width: 180px;
+      height: auto;
+
+    }
+
+    #container {
+      width: 100%;
+      max-width: 400px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 2px solid #555;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.2);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #777;
+      border-radius: 10px;
+      background: #222;
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 15px;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to bottom, #ff69b4, #d649a7);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 4px 0 #a0337a;
+      transition: transform 0.15s ease;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #a0337a;
+    }
+
+    #resposta {
+      font-style: italic;
+      font-size: 16px;
+      min-height: 50px;
+      padding: 10px;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 10px;
+      font-size: 0.7em;
+      color: #888;
+    }
+  
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+button {
+  animation: pulse 2.5s infinite;
+}
+
+#resposta {
+  transition: opacity 0.4s;
+}
+
+/* ...existing code... */
+#historico {
+  margin-top: 24px;
+  max-height: 180px;
+  overflow-y: auto;
+  font-size: 13px;
+  color: #e0e0e0;
+  text-align: left;
+  background: rgba(0,0,0,0.12);
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+#historico strong {
+  color: #ffb6f2;
+}
+@media (max-width: 500px) {
+  #container, #historico {
+    max-width: 98vw;
+    font-size: 14px;
+  }
+  .avatar {
+    width: 120px;
+  }
+}
+</style>
+</head>
+<body>
+
+
+  <img src="hannah.png" class="avatar" alt="Oráculo da Hannah">
+
+  <div id="container">
+      <div id="convite" style="margin:12px 0 18px 0;font-size:18px;color:#ffb6f2;">Pergunta, vai.</div>
+    <input type="text" id="pergunta" placeholder="Digite sua pergunta..." />
+    <button onclick="consultarOraculo()">Consultar o Oráculo</button>
+    <div id="resposta"></div>
+    <a href="#" id="compartilhar" style="display:none;font-size:13px;color:#25d366;text-decoration:underline;margin-top:4px;">Compartilhar no WhatsApp</a>
+    <div id="historico"></div>
+    <!-- ...existing code... -->
+  </div>
+
+  <footer>
+    O destino responde com voz própria. A Hannah só traduz.
+  </footer>
+
+  
+
+
+
+
+
+<script>
+  const respostas = [
+    "A resposta está no espelho… mas você ainda não aprendeu a olhar direito.",
+    "Entre o sim e o não, existe você.",
+    "Se você precisa perguntar, talvez não queira ouvir.",
+    "Confie em você — ou confie no acaso. Hoje eles são a mesma coisa.",
+    "Sim. Mas cuidado com o preço.",
+    "Não hoje. Mas quase.",
+    "Você já sabe, só está fingindo que não sabe.",
+    "A Maya latiu 3 vezes. Isso é um não. Au, au, au!",
+    "Talvez seja hora de parar de perguntar e começar a sentir.",
+    "Nem eu sei, e olha que sou o oráculo.",
+    "Você já se perdeu tanto que até a dúvida está confusa.",
+    "Sim. Mas só se você dançar antes.",
+    "Não. A menos que o céu esteja nublado e você tome chá.",
+    "Você espera respostas de fora, mas elas estão dentro.",
+    "Talvez… talvez seja só saudade disfarçada.",
+    "Siga o que arrepia — não o que acalma.",
+    "Aceite. Depois questione. Depois mude.",
+    "Eita, Maya farejou essa resposta debaixo do sofá. Foda é ver...",
+    "Dessa vez, respire. A resposta virá na próxima música.",
+    "Sim, mas só se você não abrir o Twitter depois.",
+    "Você já sabe o que eu diria. Só queria ouvir com efeito dramático, né?",
+    "Isso é uma armadilha emocional. Recomendo chá de camomila, música triste e ignorar por 24h.",
+    "Sim, mas só se você usar fonte sem serifa e não me irritar.",
+    "E o povo acha que só porque eu resolvo problemas de design, eu resolvo os do mundo também.",
+    "Falta UX na sua comunicação com você mesma. Tente de novo.",
+    "Vai pra Lapa, toma um litrão e para de arrumar confusão com teu próprio pensamento.",
+    "Você quer conselho ou quer desculpa pra continuar errando com estilo?",
+    "Dá um perdido, pega um 415 e vê onde tu desce. Às vezes a resposta é outra paisagem.",
+    "Acho que vale você ir pro alto Méier e beber uma Stellinha.",
+    "O Flamengo ganhou? Se sim, é um sinal de que a sorte está do lado de quem acredita.",
+    "Difícil responder isso hoje em dia, hein...",
+    "A Maya rosnou com a sua pergunta. Eu não irritaria a cachorra.",
+    "Se eu fosse você, faria o futuro acontecer.",
+    "Eu não sei o que você está esperando se já tá na cara.",
+    "Você não precisa da resposta. Quer um gracejo, né? Na próxima eu cobro.",
+    "A resposta é: 'Não sei, não sei, não sei'. Mas você já sabe."
+  ];
+
+  const respostasHannah = [
+  "Se existe uma Hannah e se ela for carioca, ela é a resposta pra você.",
+  "Pergunta sobre Hannah? Só posso responder: maravilhosa!",
+  "Sua vibração parece vir de longe! Chega mais pertinho e terá a resposta!",
+  "Se a dúvida é sobre Hannah, a resposta é: sim, ela pode tudo.",
+  "Você ama? Já é a resposta suficiente.",
+  "Se eu fosse você, a resposta seria Rio de Janeiro.",
+  "Hannah não precisa de oráculo, ela é o próprio destino.",
+  "A Maya confirma: au, au!",
+  "Me parece que tem uma carioca na sua vida que pode responder isso.",
+  "Vai fundo. Ela quer também.",
+  "Estou escutando uma música como resposta: 'Namora comigo, casa comigo...'",
+  "Um misto de girl from Rio com amor da sua vida"
+
+];
+
+  let historico = [];
+  
+function consultarOraculo() {
+  const pergunta = document.getElementById("pergunta").value.trim();
+  const resposta = document.getElementById("resposta");
+  const historicoDiv = document.getElementById("historico");
+
+  if (pergunta === "") {
+    resposta.innerText = "O oráculo não responde ao silêncio vazio.";
+    resposta.style.opacity = 1;
+    return;
+  }
+
+  if (!pergunta.endsWith("?")) {
+    resposta.innerText = "Ué, não era uma pergunta? O oráculo responde dúvidas, não afirmações sem coragem.";
+    resposta.style.opacity = 1;
+    return;
+  }
+
+  const audio = document.getElementById("click-sound");
+  audio.currentTime = 0;
+  audio.play();
+
+  // Aqui está a condição especial:
+  let respostaEscolhida;
+  if (pergunta.toLowerCase().includes("hannah")) {
+    const idx = Math.floor(Math.random() * respostasHannah.length);
+    respostaEscolhida = respostasHannah[idx];
+  } else {
+    const idx = Math.floor(Math.random() * respostas.length);
+    respostaEscolhida = respostas[idx]; // <-- faltava esta linha!
+  }
+
+  resposta.style.opacity = 0;
+  setTimeout(() => {
+    resposta.innerText = respostaEscolhida;
+    resposta.style.opacity = 1;
+
+    // 1. Salva no histórico
+    historico.unshift({ pergunta, resposta: respostaEscolhida });
+    // 2. Limita a 3 itens
+    if (historico.length > 3) historico.pop();
+
+    // 3. Atualiza o histórico na tela
+    historicoDiv.innerHTML = historico.map(item =>
+      `<div><strong>Você:</strong> ${item.pergunta}<br><strong>Oráculo:</strong> ${item.resposta}</div>`
+    ).join("<hr style='border:0;border-top:1px solid #333;'>");
+
+    // Salva o histórico no localStorage
+    localStorage.setItem("historicoOraculo", JSON.stringify(historico));
+
+    // Atualiza o link do WhatsApp e mostra
+    const compartilhar = document.getElementById("compartilhar");
+    const texto = encodeURIComponent(`Perguntei ao Oráculo: "${pergunta}"\nResposta: "${respostaEscolhida}"`);
+    compartilhar.href = `https://wa.me/?text=${texto}`;
+    compartilhar.style.display = "inline";// Mostra o botão de compartilhar
+
+    // Limpa o campo de pergunta
+    document.getElementById("pergunta").value = "";
+  }, 300);
+}
+
+// Ao carregar a página:
+window.onload = () => {
+  const salvo = localStorage.getItem("historicoOraculo");
+  const historicoDiv = document.getElementById("historico"); // <-- Adicione esta linha!
+  if (salvo) {
+    historico = JSON.parse(salvo);
+    historicoDiv.innerHTML = historico.map(item =>
+      `<div><strong>Você:</strong> ${item.pergunta}<br><strong>Oráculo:</strong> ${item.resposta}</div>`
+    ).join("<hr style='border:0;border-top:1px solid #333;'>");
+  }
+};
+// ...existing code...
+
+
+</script>
+
+<audio id="click-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_b0c48a76d3.mp3?filename=pop-94319.mp3" preload="auto"></audio>
+
+
+
+
+
+
+</body>
+</html>
