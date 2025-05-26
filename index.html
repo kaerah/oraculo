@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=yes">
+  <title>Hannah Oráculo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;700&family=Lekton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+    body {
+      margin: 0;
+      padding: 20px;
+       font-family: 'Kufam', Arial, sans-serif;
+      background: linear-gradient(160deg, #001336, #1a1a40);
+      color: #fdfdfd;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 28px;
+      color: #ffb6f2;
+      text-shadow: 0 0 6px #f0f;
+    }
+
+    .avatar {
+      margin-top: 10px;
+      width: 180px;
+      height: auto;
+
+    }
+
+    #convite {
+  font-family: 'Kufam', Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+    #container {
+      width: 100%;
+      max-width: 400px;
+=      padding: 16px;
+    }
+    
+    #section-1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;;
+      width: 100%;
+      justify-content: center;
+      background-color: #001D50;
+      border-radius: 16px 16px 0 0;
+      box-shadow:
+    0px 2px 8px rgba(5, 5, 32, 0.18),   /* sombra mais suave e ampla */
+    0px 6px 24px rgba(44, 44, 84, 0.12);  /* sombra mais distante e difusa */
+      gap: 16px;
+
+    }
+
+    #section-2 {
+  background: rgba(0,0,0,0.12);
+  border-radius: 0 0 16px 16px; /* só embaixo arredondado */
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0; /* sem espaço acima */
+  box-shadow:
+    0px 2px 8px rgba(44, 44, 84, 0.10); /* sombra mais leve para continuidade */
+}
+
+
+    input[type="text"] {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid #2F4EFD;
+      border-radius: 10px;
+      background: #042660;
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 0;
+      outline: none;
+        font-family: 'Kufam', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: none;
+    }
+
+    input[type="text"]:focus {
+  border: 2px solid #7ecbff;   /* borda mais grossa e clara */
+  box-shadow: 0 0 0 2px #2F4EFD33; /* leve brilho azul */
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+    button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(to bottom, #ff69b4, #da2eac);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+ font-family: 'Kufam', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: none;
+      box-shadow: 0 4px 0 #a0337a;
+      transition: transform 0.15s ease;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #a0337a;
+    }
+
+    #resposta {
+        font-family: 'Lekton', Arial, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+      min-height: 50px;
+      padding: 24px 16px;
+      width: 100%;
+      margin: 0 auto; 
+      background: linear-gradient( #042660 0%, #00173F 100%) padding-box,
+        linear-gradient(0deg, #042660 0%, #0A3278 100%) border-box;    /* borda invertida */
+      border: 1px solid transparent;
+      border-radius: 12px;
+      box-sizing: border-box;
+      transition: opacity 0.4s;
+      word-break: break-word;
+      height: auto;
+      min-height: 50px;
+      display: block;
+
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 10px;
+  font-family: 'Kufam', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #888;
+    }
+  
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+button {
+  //**animation: pulse 2.5s infinite;**//
+}
+
+#resposta {
+  transition: opacity 0.4s;
+}
+
+#compartilhar {
+  font-family: 'Kufam', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: none;
+}
+
+#historico {
+  font-family: 'Lekton', Arial, sans-serif;
+  text-transform: uppercase;
+  max-height: 180px;
+  overflow-y: auto;
+  font-size: 13px;
+  color: #e0e0e0;
+  text-align: left;
+  background: rgba(0,0,0,0.12);
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+#historico strong {
+  color: #ffb6f2;
+}
+@media (max-width: 500px) {
+  #container, #historico {
+    max-width: 98vw;
+    font-size: 14px;
+  }
+  .avatar {
+    width: 120px;
+  }
+}
+</style>
+</head>
+<body>
+
+  <img src="hannah.png" class="avatar" alt="Oráculo da Hannah">
+  <div id="convite" style="margin:12px 0 18px 0;font-size:18px;color:#ffb6f2;"></div>
+
+  <div id="container">
+    <div id="section-1">  
+      <input type="text" id="pergunta" placeholder="Digite sua pergunta..." />
+      <button onclick="consultarOraculo()">Consultar o Oráculo</button>
+      <div id="resposta"></div>
+<a href="#" id="compartilhar" style="display:none;font-size:13px;color:#25d366;text-decoration:underline;margin-top:4px;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="vertical-align:middle;margin-right:4px;" viewBox="0 0 32 32"><path fill="#25d366" d="M16 3C9.373 3 4 8.373 4 15c0 2.637.857 5.08 2.357 7.09L4 29l7.184-2.31A12.94 12.94 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 22c-1.98 0-3.89-.52-5.547-1.5l-.393-.234-4.29 1.382 1.41-4.13-.256-.4A9.94 9.94 0 0 1 6 15c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10zm5.29-7.71c-.29-.145-1.71-.844-1.977-.94-.266-.098-.46-.145-.655.146-.193.29-.748.94-.917 1.133-.168.193-.337.217-.627.072-.29-.145-1.225-.452-2.334-1.44-.863-.77-1.445-1.72-1.616-2.01-.168-.29-.018-.447.127-.592.13-.13.29-.337.435-.506.145-.168.193-.29.29-.483.097-.193.048-.362-.024-.507-.072-.145-.655-1.58-.897-2.166-.237-.57-.478-.492-.655-.5-.168-.007-.362-.009-.555-.009-.193 0-.507.073-.773.362-.266.29-1.016.994-1.016 2.42 0 1.426 1.04 2.803 1.186 2.997.145.193 2.05 3.13 4.97 4.27.695.3 1.236.478 1.66.612.697.222 1.332.19 1.832.115.56-.084 1.71-.698 1.953-1.372.24-.674.24-1.252.168-1.372-.072-.12-.266-.193-.555-.338z"/></svg>
+  Compartilhar no WhatsApp
+</a>    </div>
+      <div id="section-2">  
+      <div id="historico"></div>
+    </div>
+  </div>
+
+
+  <footer>
+    O destino responde com voz própria. A Hannah só traduz.
+  </footer>
+
+
+<script>
+  const respostas = [
+    "A resposta está no espelho… mas você ainda não aprendeu a olhar direito.",
+    "Entre o sim e o não, existe você.",
+    "Se você precisa perguntar, talvez não queira ouvir.",
+    "Confie em você — ou confie no acaso. Hoje eles são a mesma coisa.",
+    "Sim. Mas cuidado com o preço.",
+    "Não hoje. Mas quase.",
+    "Você já sabe, só está fingindo que não sabe.",
+    "A Maya latiu 3 vezes. Isso é um não. Au, au, au!",
+    "Talvez seja hora de parar de perguntar e começar a sentir.",
+    "Nem eu sei, e olha que sou o oráculo.",
+    "Você já se perdeu tanto que até a dúvida está confusa.",
+    "Sim. Mas só se você dançar antes.",
+    "Não. A menos que o céu esteja nublado e você tome chá.",
+    "Você espera respostas de fora, mas elas estão dentro.",
+    "Talvez… talvez seja só saudade disfarçada.",
+    "Siga o que arrepia — não o que acalma.",
+    "Aceite. Depois questione. Depois mude.",
+    "Eita, Maya farejou essa resposta debaixo do sofá. Foda é ver...",
+    "Dessa vez, respire. A resposta virá na próxima música.",
+    "Sim, mas só se você não abrir o Twitter depois.",
+    "Você já sabe o que eu diria. Só queria ouvir com efeito dramático, né?",
+    "Isso é uma armadilha emocional. Recomendo chá de camomila, música triste e ignorar por 24h.",
+    "Sim, mas só se você usar fonte sem serifa e não me irritar.",
+    "E o povo acha que só porque eu resolvo problemas de design, eu resolvo os do mundo também.",
+    "Falta UX na sua comunicação com você mesma. Tente de novo.",
+    "Vai pra Lapa, toma um litrão e para de arrumar confusão com teu próprio pensamento.",
+    "Você quer conselho ou quer desculpa pra continuar errando com estilo?",
+    "Dá um perdido, pega um 415 e vê onde tu desce. Às vezes a resposta é outra paisagem.",
+    "Acho que vale você ir pro alto Méier e beber uma Stellinha.",
+    "Se a resposta for sim, vá com tudo. Se for não, vá mesmo assim.",
+    "Essa resposta só aparece depois de um abraço.",
+    "Se a vida fosse um layout, eu alinhava tudo à esquerda.",
+    "Se a dúvida persistir, tome um banho e tente de novo.",
+    "Se a resposta não fizer sentido, talvez a pergunta também não faça.",
+    "Pergunta pro Google, mas volta aqui depois.",
+    "Eu ia responder, mas fiquei pensando na vida…",
+    "Se conselho fosse bom, eu vendia. Mas vou te dar um de graça: respira fundo.",
+    "Você já tentou desligar e ligar de novo?",
+    "Se for pra se arrepender, que seja de não ter tentado.",
+    "Você quer um sinal? Olha pra cima. Se não cair nada, é pra ir!",
+    "Às vezes, não saber é a melhor resposta.",
+    "Eu só respondo perguntas acompanhadas de chocolate.",
+    "Se a vida te der limões, faça uma caipirinha e tente de novo.",
+    "Essa resposta está escondida atrás de um arco-íris.",
+    "Se não sabe o que fazer, dance. Às vezes o corpo entende antes da cabeça.",
+    "Se a resposta for estranha, é porque o universo quis te surpreender.",
+    "Se a resposta não vier, inventa uma boa história.",
+    "Já pensou em usar grid pra organizar seus sentimentos?",
+    "Se a dúvida persistir, muda a paleta de cores.",
+    "Às vezes, o problema é só falta de padding.",
+    "Se a dúvida for grande, faz um protótipo antes de decidir.",
+    "Hmm...Tenho que fazer um discovery para responder isso.",
+    "Hoje o oráculo está de bom humor. Aproveite!",
+    "Se a vida fosse fácil, não precisava de oráculo.",
+    "Se não sabe, inventa. O importante é parecer confiante.",
+    "Pergunta pro vento. Ele adora espalhar segredos.",
+    "O Flamengo ganhou? Se sim, é um sinal de que a sorte está do lado de quem acredita.",
+    "Difícil responder isso hoje em dia, hein...",
+    "A Maya rosnou com a sua pergunta. Eu não irritaria a cachorra.",
+    "Se eu fosse você, faria o futuro acontecer.",
+    "Eu não sei o que você está esperando se já tá na cara.",
+    "Você não precisa da resposta. Quer um gracejo, né? Na próxima eu cobro.",
+    "A resposta é: 'Não sei, não sei, não sei'. Mas você já sabe.",
+    "Que? Você ainda tem dúvida? Agora quem duvida sou eu, mas de você.",
+    "Ah, me poupe! hahaha Nem vem com essa pergunta.",
+    "Eu entendo, mas tem algumas coisas que só o tempo responde.",
+    "Pare de perguntar isso pra mim e entenda melhor o que se passa com você.",
+    "O Sim ou o não do universo depende de você. O que você quer?",
+    "Fico pensando o que Sartre diria para você lendo isso...",
+    "Precisa mesmo de um sim ou não? Acho que a resposta está na sua cara.",
+    "Ixi, que isso? Você já bebeu hoje?",
+    "Sócrates diria: só sei que nada sei… mas eu chutaria um sim.",
+    "Se a dúvida persistir, lembre-se: para Sartre, até não escolher já é uma escolha.",
+    "Sabe, nisso a resposta é você quem faz. O oráculo só observa.",
+    "Não tenho certeza, mas o universo sempre ajuda os nerds.",
+    "Você acredita? Você quer? Deixe na sua cabeça só o que importa."
+
+
+  ];
+
+  const respostasHannah = [
+  "Se existe uma Hannah e se ela for carioca, ela é a resposta pra você.",
+  "Pergunta sobre a Hannah? Só posso responder: maravilhosa!",
+  "Sua vibração parece vir de longe! Chega mais pertinho e terá a resposta!",
+  "Se a dúvida é sobre Hannah, a resposta é: ela é tudo de bom.",
+  "Você ama? Já é a resposta suficiente.",
+  "Se eu fosse você, a resposta seria Rio de Janeiro.",
+  "Hannah não precisa de oráculo, ela é o próprio destino.",
+  "O pessoa da secretaria do destino disse que o coração dela foi fisgado por alguém do Norte.",
+  "Me parece que tem uma carioca na sua vida que pode responder isso.",
+  "Se envolver ela, é certeza de boas histórias.",
+  "Acho que sou suspeita para falar, hein rs.",
+  "Por quê? Tá com medo de perguntar direto pra ela?",
+  "Não acha que perguntar isso pra mim é meio engraçado?",
+  "Você quer mesmo que eu responda ou só quer ouvir a voz dela?",
+  "Você sabe que ela é a resposta certa. Não entendi o motivo da pergunta.",
+  "Tá com dúvida? Olha e vê o que sente.",
+  "As suas músicas já responderam isso antes mesmo de você perguntar."
+];
+
+const respostasHannahAmor = [
+  "O amor dela é tão óbvio que até o oráculo fica sem graça.",
+  "Ela já ama — e sente isso todo dia.",
+  "Estou propensa a falar coisas lindas sobre isso hoje.",
+  "Um misto de girl from Rio com amor da sua vida, né?",
+  "Se depender da Hannah, o sim já está dito faz tempo.",
+  "Alguém que você sabe quem já sonha com isso toda noite.",
+  "O universo inteiro conspira para esse amor acontecer.",
+  "Vai fundo. Ela quer também.",
+  "A resposta é: SIM, com todas as letras e com todo o coração.",
+  "To enxergando a resposta como um filme de amor",
+  "Se você perguntar de novo, o oráculo vai chorar de emoção.",
+  "Se amor fosse resposta, a Hannah seria a pergunta.",
+  "O sim é mais certo que o nascer do sol.",
+  "Se depender, o altar já está montado. 💍",
+  "Ela diz sim até de olhos fechados.",
+  "A resposta é tão forte e doce que nem precisa de oráculo.",
+  "O universo recebe pensamentos desse amor mais vezes do que você imagina.",
+  "Se a pergunta é sobre amor, a resposta é sempre Hannah.",
+  "O oráculo ouviu: 'Sim, sim, sim!' ecoando no universo.",
+  "Ela casaria até em Marte.",
+  "Copacabana e as praias do Rio estão esperando isso.",
+  "O futuro juntas é tão certo quanto o pôr do sol. 💍",
+  "Estou escutando uma música como resposta: 'Namora comigo, casa comigo...'",
+  "Ela já sonhou com até com o casamento — e foi lindo!💍",
+  "Deixa eu te falar. A distância não impede nada disso.",
+  "O amor não conhece distância, só vontade de estar perto.",
+  "Quando a saudade aperta, é só fechar os olhos e sentir o abraço de longe.",
+  "O universo encurta qualquer distância quando existe amor de verdade.",
+  "Recebi aqui isso: Do outro lado do mapa, alguém pensa em você agora.",
+  "Te falar, dois corações conectados não precisam de geografia.",
+  "Mesmo longe, isso é presença constante no pensamento.",
+  "Vou te dizer outra coisa: Se a saudade apertar, lembre que o destino adora unir quem se ama.",
+  "Do outro lado da tela, tem alguém sorrindo só de lembrar de você.",
+  "Quando o amor é verdadeiro, até o Google Maps fica com inveja.",
+  "Bip, bip! Radio do amor tocando: 'Deixa eu dizer que te amo... uuuuuhhh!'",
+  "Olha, Hannah tá tão a fim que eu nem precisava ser oráculo.",
+  "Eu to achando que é pra vida toda. Você também?",
+  "Consegui sentir as batidas de um certo coração daqui. Não acha que a resposta está aí?",
+  "Me distraí porque senti um beijo sendo enviado pra você quando perguntou."
+];
+
+const respostasHannahKarolManauara = [
+  "O que eu tô sabendo que tem muito amor aí no meio.",
+  "Essa mistura de Rio e Manaus faz até o universo suar.",
+  "Eu pensei manauara e associei com amor da Hannah no mesmo segundo.",
+  "O destino sorri quando vê Karol e Hannah na mesma frase.",
+  "Eu acho que se juntar sentimento, compromisso e vontade é certeza de sucesso.",
+  "Interferência aqui. Só consigo responder que a Hannah ama.",
+  "Não é lindo esse encontro de almas?",
+  "Com esse duo, tem tudo pra dar certo.",
+  "Não sei você, mas eu cruzaria qualquer distância por esse amor.",
+  "Acho que a única resposta que cabe aqui é Hannah <3 Karol.",
+  "Só consigo pensar que as duas têm cheiro de amor pra vida toda, né?",
+  "O futuro me contou de namoro e tudo mais.",
+  "Karol e Hannah? O oráculo tá apaixonado também.",
+  "O oráculo tá sentindo amor no ar.",
+  "Ela ama. A resposta é essa.",
+  "Existe dúvidas mesmo aqui? Só consigo enxergar coisa boa.",
+  "Karol? Eu escutei do destino que a Hannah quer seu beijo!"
+];
+
+const respostasHannahSafada = [
+  "Você e ela? Só se for agora… 😏",
+  "Não sei o motivo, mas pensei em coelhos. Isso responde algo?",
+  "O oráculo ficou até vermelho com essa pergunta!",
+  "Estou recebendo que ela já pensou nisso mais vezes do que você imagina…",
+  "Se depender da Hannah, a resposta é sim — e com vontade!",
+  "Só de perguntar, já subiu a temperatura aqui.",
+  "Não dá para resistir a um convite desses.",
+  "O universo conspira para noites quentes…",
+  "Se for com amor, com certeza.",
+  "A resposta é: só se for com você.",
+  "Acho que alguém já sonhou com isso (e acordou sorrindo).",
+  "O oráculo recomenda: luz baixa, música boa e… deixa rolar.",
+  "A Maya vai ter que dormir fora do quarto dessa vez!",
+  "Só está esperando você chamar.",
+  "Se a pergunta é safadinha, a resposta é sim com bônus.",
+  "Alguém gosta quando você pergunta essas coisas…",
+  "Interferência musical do pensamento de alguém: 'Sex with me, so amazing ...'",
+  "Uau, olha isso! O oráculo ficou sem palavras (ela quer).",
+  "Você sabe que ela já pensou nisso, né?",
+  "Eu deveria responder isso mesmo? Vai logo saber!😏",
+  "Hannah está escutando: 'Eu e você suado no sexo bolado'. Isso me constrangeu.",
+  "Agora? Que isso, hein! Pegando fogo! 🔥",
+  "Por favor, só tire a Maya do quarto antes.",
+  "Acho que a melhor resposta para você é: Já separa o vinho e a playlist.",
+  "Sim e não esquece de trancar a porta.",
+  "Oh, toma um banho, faz um drink e chama pra ver o que acontece.",
+  "Com carinho, pode tudo!",
+  "'Vem amor bate não paraaaa' Ops, foi mal! Me distraí."
+
+
+];
+
+  let historico = [];
+  
+function consultarOraculo() {
+  const pergunta = document.getElementById("pergunta").value.trim();
+  const resposta = document.getElementById("resposta");
+  const historicoDiv = document.getElementById("historico");
+
+  if (pergunta === "") {
+    resposta.innerText = "O oráculo não responde ao silêncio vazio.";
+    resposta.style.opacity = 1;
+    return;
+  }
+
+  if (!pergunta.endsWith("?")) {
+    resposta.innerText = "Ué, não era uma pergunta? O oráculo responde dúvidas, não afirmações sem coragem.";
+    resposta.style.opacity = 1;
+    return;
+  }
+
+  const audio = document.getElementById("click-sound");
+  audio.currentTime = 0;
+  audio.play();
+
+  // Aqui está a condição especial:
+  let respostaEscolhida;
+  const perguntaLower = pergunta.toLowerCase();
+
+  if (
+  perguntaLower.includes("hannah") && (
+    perguntaLower.includes("karol") ||
+    perguntaLower.includes("karoline") ||
+    perguntaLower.includes("manauara")
+  )
+) {
+  const idx = Math.floor(Math.random() * respostasHannahKarolManauara.length);
+  respostaEscolhida = respostasHannahKarolManauara[idx];
+} else if (
+    perguntaLower.includes("hannah") && (
+      perguntaLower.includes("transar") ||
+      perguntaLower.includes("transaria comigo") ||
+      perguntaLower.includes("sexo") ||
+      perguntaLower.includes("dar pra mim") ||
+      perguntaLower.includes("beijar") ||
+      perguntaLower.includes("dormir junto") ||
+      perguntaLower.includes("tirar a roupa") ||
+      perguntaLower.includes("tirar a minha roupa") ||
+      perguntaLower.includes("tiraria a minha roupa") ||
+      perguntaLower.includes("tesão") ||
+      perguntaLower.includes("tesao") ||
+      perguntaLower.includes("gostosa") ||
+      perguntaLower.includes("melada") ||
+      perguntaLower.includes("molhada") ||
+      perguntaLower.includes("quente") ||
+      perguntaLower.includes("tentação") ||
+      perguntaLower.includes("pegar") ||
+      perguntaLower.includes("safad") ||
+      perguntaLower.includes("morder") ||
+      perguntaLower.includes("chupar") ||
+      perguntaLower.includes("lamber") ||
+      perguntaLower.includes("fazer amor") ||
+      perguntaLower.includes("me comer") ||
+      perguntaLower.includes("me comeria") ||
+      perguntaLower.includes("me dar prazer") ||
+      perguntaLower.includes("na cama")
+    )&&
+      !(
+    perguntaLower.includes("outra pessoa") ||
+    perguntaLower.includes("ex") ||
+    perguntaLower.includes("outra") ||
+    perguntaLower.includes("outro")
+  )
+  ) {
+    const idx = Math.floor(Math.random() * respostasHannahSafada.length);
+    respostaEscolhida = respostasHannahSafada[idx];
+  } else if (
+    perguntaLower.includes("hannah") && (
+      perguntaLower.includes("me ama") ||
+      perguntaLower.includes("amor") ||
+      perguntaLower.includes("amo") ||
+      perguntaLower.includes("casar") ||
+      perguntaLower.includes("casaria comigo") ||
+      perguntaLower.includes("namora") ||
+      perguntaLower.includes("namorar") ||
+      perguntaLower.includes("namoro") ||
+      perguntaLower.includes("namoraria comigo") ||
+      perguntaLower.includes("noiva") ||
+      perguntaLower.includes("noivar") ||
+      perguntaLower.includes("gosta de mim") ||
+      perguntaLower.includes("me quer") ||
+      perguntaLower.includes("me deseja") ||
+      perguntaLower.includes("amorzinho") ||    
+      perguntaLower.includes("beijo") ||   
+      perguntaLower.includes("beijinho") ||   
+      perguntaLower.includes("abraço") ||         
+      perguntaLower.includes("abraça") ||         
+      perguntaLower.includes("me beijaria") ||      
+      perguntaLower.includes("pensa em mim")
+    ) &&
+      !(
+    perguntaLower.includes("outra pessoa") ||
+    perguntaLower.includes("ex") ||
+    perguntaLower.includes("outra") ||
+    perguntaLower.includes("outro")
+  )
+  ) {
+    const idx = Math.floor(Math.random() * respostasHannahAmor.length);
+    respostaEscolhida = respostasHannahAmor[idx];
+  } else if (perguntaLower.includes("hannah")) {
+    const idx = Math.floor(Math.random() * respostasHannah.length);
+    respostaEscolhida = respostasHannah[idx];
+  } else {
+    const idx = Math.floor(Math.random() * respostas.length);
+    respostaEscolhida = respostas[idx]; // <-- faltava esta linha!
+  }
+
+  resposta.style.opacity = 0;
+  setTimeout(() => {
+    resposta.innerText = respostaEscolhida;
+    resposta.style.opacity = 1;
+
+    // 1. Salva no histórico
+    historico.unshift({ pergunta, resposta: respostaEscolhida });
+    // 2. Limita a 3 itens
+    if (historico.length > 3) historico.pop();
+
+    // 3. Atualiza o histórico na tela
+    historicoDiv.innerHTML = historico.map(item =>
+      `<div><strong>Você:</strong> ${item.pergunta}<br><strong>Oráculo:</strong> ${item.resposta}</div>`
+    ).join("<hr style='border:0;border-top:1px solid #333;'>");
+
+    // Salva o histórico no localStorage
+    localStorage.setItem("historicoOraculo", JSON.stringify(historico));
+
+    // Atualiza o link do WhatsApp e mostra
+    const compartilhar = document.getElementById("compartilhar");
+    const texto = encodeURIComponent(`Perguntei ao Oráculo: "${pergunta}"\nResposta: "${respostaEscolhida}"`);
+    compartilhar.href = `https://wa.me/?text=${texto}`;
+    compartilhar.style.display = "inline";// Mostra o botão de compartilhar
+
+    // Limpa o campo de pergunta
+    document.getElementById("pergunta").value = "";
+  }, 300);
+}
+
+// Ao carregar a página:
+window.onload = () => {
+  const salvo = localStorage.getItem("historicoOraculo");
+  const historicoDiv = document.getElementById("historico"); // <-- Adicione esta linha!
+  if (salvo) {
+    historico = JSON.parse(salvo);
+    historicoDiv.innerHTML = historico.map(item =>
+      `<div><strong>Você:</strong> ${item.pergunta}<br><strong>Oráculo:</strong> ${item.resposta}</div>`
+    ).join("<hr style='border:0;border-top:1px solid #333;'>");
+  }
+  // Frase convite aleatória
+  const convite = document.getElementById("convite");
+  const idx = Math.floor(Math.random() * frasesConvite.length);
+  convite.innerText = frasesConvite[idx];
+};
+
+const frasesConvite = [
+  "O universo está ouvindo…",
+  "O que seu coração quer saber hoje?",
+  "Pergunte e prepare-se!",
+  "Pergunte que o destino responde.",
+  "Escreva sua dúvida e eu ajudo.",
+  "O oráculo está pronto. E você?",
+  "O que você gostaria de saber?",
+  "Tá com medo? Pergunte!",
+  "Hannah Oráculo ao seu dispor.",
+  "Pergunta, vai!"
+];
+
+</script>
+
+<audio id="click-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_b0c48a76d3.mp3?filename=pop-94319.mp3" preload="auto"></audio>
+
+</body>
+</html>
